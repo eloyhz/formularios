@@ -1,0 +1,55 @@
+<form #formulario="ngForm" (ngSubmit)="enviar(formulario)">
+  <div class="form-group">
+    <label>Nombre del producto
+    </label>
+    <input type="text" class="form-control" [(ngModel)]="producto.nombre" required minlength="4" #nombre="ngModel" name="nombre">
+  </div>
+
+  <p> Nombre valido: {{ nombre.valid }} </p>
+
+
+  <div class="form-group precio">
+    <label>Precio</label>
+    <input type="number" class="form-control" [(ngModel)]="producto.precio" name="precio" required>
+  </div>
+
+  <fieldset>
+    <legend>Origen</legend>
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="origen" id="" [value]="true" [(ngModel)]="producto.esNacional"
+          (ngModelChange)="producto.pais='mx'">
+        Nacional
+      </label>
+    </div>
+
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="origen" id="" [value]="false" [(ngModel)]="producto.esNacional"
+          (ngModelChange)="producto.pais='us'">
+        Importado
+      </label>
+    </div>
+
+    <div *ngIf="!producto.esNacional">
+      <div class="form-group">
+        <label for="">Pais de origen</label>
+        <select class="form-control" name="pais" id="" [(ngModel)]="producto.pais">
+          <option value="ca">Canadá</option>
+          <option value="us" selected>Estados Unidos</option>
+          <option value="fr">Francia</option>
+        </select>
+      </div>
+    </div>
+
+  </fieldset>
+
+  <p>El producto es <span class="text-info">{{producto | json}}</span></p>
+
+  <p>El precio del producto es <span class="text-info">
+      {{producto.precio | currency}}</span></p>
+
+  <button type="submit" class="btn btn-primary"
+  [disabled]="formulario.invalid">Guardar</button>
+
+</form>

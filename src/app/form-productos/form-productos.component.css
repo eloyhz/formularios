@@ -1,0 +1,11 @@
+.ng-valid {
+  border-color: lightgreen;
+}
+
+.ng-invalid {
+  border-color: lightsalmon;
+}
+
+.precio .ng-dirty {
+  border-color: rgb(42, 44, 179);
+}
